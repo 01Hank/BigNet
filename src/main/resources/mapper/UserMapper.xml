@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bignet.db.mapper.UserMapper">
+    <!--查询所有用户-->
+    <select id="findAll" resultType="com.bignet.db.entity.impl.User">
+        select * from userinfo
+    </select>
+
+    <!--查询单个用户-->
+    <select id="getData" resultType="com.bignet.db.entity.impl.User">
+        select * from userinfo where uid = #{uid}
+    </select>
+
+    <!--保存用户数据-->
+    <insert id="save" parameterType="com.bignet.db.entity.impl.User">
+        insert into userinfo (uid,name,passward,email,data) values (#{uid},#{name},#{passward},#{email},#{data})
+    </insert>
+
+
+    <!--创建表-->
+    <update id="initTable">
+        CREATE TABLE IF NOT EXISTS userinfo
+        (
+        uid int(10) NOT NULL PRIMARY KEY COMMENT '主键id',
+        name varchar(255) NULL COMMENT '名字',
+        passward int(11) NOT NULL COMMENT '密码',
+        email varchar(11) NULL COMMENT '邮箱',
+        data binary(255) NULL COMMENT '数据'
+        )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '用户数据表'
+    </update>
+</mapper>
